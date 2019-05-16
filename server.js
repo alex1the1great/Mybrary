@@ -6,6 +6,7 @@ if (process.env.NODE_ENV !== "production") {
 const express = require("express");
 const expressLayouts = require("express-ejs-layouts");
 const mongoose = require("mongoose");
+const methodOverride = require("method-override");
 
 // Express Init
 const app = express();
@@ -23,6 +24,9 @@ app.use(express.static("public"));
 
 // Express BodyParser
 app.use(express.urlencoded({ limit: "10mb", extended: false }));
+
+// Method Override
+app.use(methodOverride("_method"));
 
 // MongoDB Config
 mongoose.connect(process.env.DATABASE_URL, { useNewUrlParser: true });
